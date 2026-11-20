@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arkady Zgonnikov</title>
+  <meta name="description" content="Arkady Zgonnikov — Assistant Professor, Department of Cognitive Robotics, TU Delft. Cognitive and computational models of human behavior in traffic.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent:       #083e70;
+      --accent-light: #1464a8;
+      --text:         #1a2535;
+      --muted:        #5b6e84;
+      --border:       #d6e2ef;
+      --bg:           #ffffff;
+      --bg-subtle:    #f3f7fc;
+      --width:        740px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 15.5px;
+      line-height: 1.72;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      color: var(--accent-light);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* ─── Layout ─── */
+    .wrap {
+      max-width: var(--width);
+      margin: 0 auto;
+      padding: 0 1.6rem;
+    }
+
+    /* ─── Header ─── */
+    header {
+      padding: 3.8rem 0 0;
+    }
+
+    .name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: 3rem;
+      letter-spacing: -0.02em;
+      line-height: 1.08;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+
+    .tagline {
+      font-size: 0.95rem;
+      color: var(--muted);
+      font-weight: 400;
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem 1.2rem;
+      font-size: 0.88rem;
+      margin-bottom: 1.8rem;
+    }
+    .contact-links a { font-weight: 500; }
+
+    /* section jump nav */
+    .jump-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 0;
+    }
+    .jump-nav a {
+      display: inline-block;
+      padding: 0.55rem 0.9rem 0.55rem 0;
+      margin-right: 1rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .jump-nav a:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* ─── Sections ─── */
+    section {
+      padding: 2.4rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    section:last-of-type { border-bottom: none; }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: 1.55rem;
+      color: var(--text);
+      margin-bottom: 1.1rem;
+      padding-left: 0.8rem;
+      border-left: 3px solid var(--accent);
+      margin-left: -0.8rem;
+      line-height: 1.2;
+    }
+
+    h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin: 1.6rem 0 0.7rem;
+    }
+    h3:first-child { margin-top: 0; }
+
+    p { margin-bottom: 0.75rem; }
+    p:last-child { margin-bottom: 0; }
+
+    strong { font-weight: 600; }
+
+    /* ─── Positions ─── */
+    .position {
+      margin-bottom: 1.1rem;
+    }
+    .position:last-child { margin-bottom: 0; }
+    .pos-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .pos-org {
+      font-size: 0.93rem;
+      margin: 0.05rem 0;
+    }
+    .pos-date {
+      font-size: 0.83rem;
+      color: var(--muted);
+    }
+
+    /* ─── Education ─── */
+    .edu-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.1rem 1rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.94rem;
+    }
+    .edu-row:last-child { border-bottom: none; }
+    .edu-degree { font-weight: 600; }
+    .edu-meta { color: var(--muted); font-size: 0.84rem; white-space: nowrap; }
+
+    /* ─── Team ─── */
+    .team-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.2rem 1.2rem;
+      padding: 0.55rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.93rem;
+      align-items: start;
+    }
+    .team-row:last-child { border-bottom: none; }
+    .team-name { font-weight: 600; }
+    .team-topic { color: var(--muted); font-size: 0.86rem; }
+    .team-badge {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      padding: 0.1em 0.45em;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      display: inline-block;
+      margin-left: 0.4em;
+      vertical-align: middle;
+    }
+    .team-date {
+      color: var(--muted);
+      font-size: 0.83rem;
+      text-align: right;
+      padding-top: 0.1rem;
+    }
+
+    /* ─── Teaching ─── */
+    .teaching-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.1rem 1.2rem;
+      padding: 0.55rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.93rem;
+      align-items: start;
+    }
+    .teaching-row:last-child { border-bottom: none; }
+    .teaching-name { font-weight: 600; }
+    .teaching-meta { color: var(--muted); font-size: 0.84rem; }
+    .teaching-year { color: var(--muted); font-size: 0.83rem; text-align: right; }
+
+    /* ─── Talks ─── */
+    .talk-row {
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.93rem;
+    }
+    .talk-row:last-child { border-bottom: none; }
+    .talk-title { font-style: italic; margin-bottom: 0.15rem; }
+    .talk-venue { color: var(--muted); font-size: 0.84rem; }
+    .talk-highlight {
+      font-weight: 600;
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    /* ─── Service ─── */
+    .service-row {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.1rem 0.8rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.93rem;
+    }
+    .service-row:last-child { border-bottom: none; }
+    .service-role {
+      font-weight: 600;
+      white-space: nowrap;
+      color: var(--accent);
+      font-size: 0.84rem;
+      padding-top: 0.12rem;
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      padding: 2.2rem 0;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--accent); }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 580px) {
+      .name { font-size: 2.3rem; }
+      .team-row, .teaching-row, .service-row { grid-template-columns: 1fr; }
+      .team-date, .teaching-year { text-align: left; }
+      .jump-nav a { font-size: 0.75rem; margin-right: 0.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <h1 class="name">Arkady Zgonnikov</h1>
+    <p class="tagline">
+      Assistant Professor &middot; Department of Cognitive Robotics, TU Delft<br>
+      Director for Partnerships, <a href="https://www.tudelft.nl/centre-for-meaningful-human-control">Centre for Meaningful Human Control</a>
+      &middot; Co-director, <a href="https://www.tudelft.nl/en/ai/herald-lab">HERALD Lab</a>
+    </p>
+    <div class="contact-links">
+      <a href="mailto:a.zgonnikov@tudelft.nl">a.zgonnikov@tudelft.nl</a>
+      <a href="https://github.com/cherepaha" target="_blank">GitHub</a>
+      <a href="https://scholar.google.com/citations?user=QN82ZIcAAAAJ&hl=en" target="_blank">Google Scholar</a>
+    </div>
+    <nav class="jump-nav">
+      <a href="#research">Research</a>
+      <a href="#positions">Positions</a>
+      <a href="#team">Team</a>
+      <a href="#teaching">Teaching</a>
+      <a href="#talks">Talks</a>
+      <a href="#service">Service</a>
+      <a href="#media">Media</a>
+    </nav>
+  </header>
+
+  <!-- ─── Research ─── -->
+  <section id="research">
+    <h2>Research</h2>
+    <p>
+      I develop cognitive and computational models of human behavior in traffic, with a focus on how drivers
+      make decisions under uncertainty when interacting with automated vehicles. My work bridges cognitive
+      neuroscience, human factors, and AI, contributing to safer, more human-compatible autonomous driving systems.
+    </p>
+    <p>
+      I publish in <strong>intelligent transportation</strong>
+      (Transportation Research Part F, IEEE Transactions on Intelligent Transportation Systems,
+      Accident Analysis and Prevention),
+      <strong>general science journals</strong>
+      (Nature Communications, PNAS Nexus, Royal Society Open Science),
+      and <strong>cognitive science &amp; computer science</strong> venues
+      (Computational Brain and Behavior, Human Factors, IJCAI, ECAI, AAMAS).
+    </p>
+  </section>
+
+  <!-- ─── Positions ─── -->
+  <section id="positions">
+    <h2>Academic Positions</h2>
+
+    <h3>Current</h3>
+
+    <div class="position">
+      <div class="pos-title">Assistant Professor</div>
+      <div class="pos-org">Department of Cognitive Robotics, Faculty of Mechanical Engineering, Delft University of Technology</div>
+      <div class="pos-date">November 2020 &ndash; present</div>
+    </div>
+
+    <div class="position">
+      <div class="pos-title">Director for Partnerships and Collaborations</div>
+      <div class="pos-org"><a href="https://www.tudelft.nl/centre-for-meaningful-human-control">Centre for Meaningful Human Control</a>, TU Delft</div>
+      <div class="pos-date">October 2024 &ndash; present</div>
+    </div>
+
+    <div class="position">
+      <div class="pos-title">Co-director</div>
+      <div class="pos-org"><a href="https://www.tudelft.nl/en/ai/herald-lab">HERALD Lab</a>, Delft University of Technology</div>
+      <div class="pos-date">February 2021 &ndash; present</div>
+    </div>
+
+    <h3>Previous</h3>
+
+    <div class="position">
+      <div class="pos-title">Postdoctoral Researcher</div>
+      <div class="pos-org"><a href="https://www.tudelft.nl/aitech">AiTech</a> and Department of Cognitive Robotics, Delft University of Technology</div>
+      <div class="pos-date">June 2019 &ndash; November 2020</div>
+    </div>
+
+    <div class="position">
+      <div class="pos-title">Postdoctoral Researcher</div>
+      <div class="pos-org">School of Computer Science and Engineering, University of Aizu</div>
+      <div class="pos-date">October 2014 &ndash; September 2015 &middot; August 2017 &ndash; March 2019</div>
+    </div>
+
+    <div class="position">
+      <div class="pos-title">Postdoctoral Researcher</div>
+      <div class="pos-org">School of Psychology, University of Galway</div>
+      <div class="pos-date">October 2015 &ndash; August 2017</div>
+    </div>
+
+    <h3>Education</h3>
+
+    <div class="edu-row">
+      <div>
+        <span class="edu-degree">Ph.D.</span> in Computer Science and Engineering<br>
+        <span style="color:var(--muted); font-size:0.88rem;">University of Aizu, Japan</span>
+      </div>
+      <div class="edu-meta">2011&ndash;2014</div>
+    </div>
+    <div class="edu-row">
+      <div>
+        <span class="edu-degree">Specialist (M.Sc.)</span> in Applied Mathematics and Computer Science<br>
+        <span style="color:var(--muted); font-size:0.88rem;">Saint-Petersburg State University, Russia</span>
+      </div>
+      <div class="edu-meta">2004&ndash;2009</div>
+    </div>
+  </section>
+
+  <!-- ─── Team ─── -->
+  <section id="team">
+    <h2>Research Team and Alumni</h2>
+
+    <h3>PhD Candidates</h3>
+
+    <div class="team-row">
+      <div>
+        <span class="team-name">Ashwin George</span><br>
+        <span class="team-topic">Quantifying Responsibility in Spatial Multi-Agent Interactions</span>
+      </div>
+      <div class="team-date">2021&ndash;2026</div>
+    </div>
+    <div class="team-row">
+      <div>
+        <span class="team-name">Sahel Akbari</span> <span style="font-size:0.84rem;color:var(--muted);">(Erasmus MC)</span><br>
+        <span class="team-topic">Advancing Data-Driven Methods for Assessment of Upper-Extremity Movements Post-Stroke</span>
+      </div>
+      <div class="team-date">2023&ndash;present</div>
+    </div>
+    <div class="team-row">
+      <div>
+        <span class="team-name">Julian Schumann</span> <span class="team-badge">PhD cum laude</span><br>
+        <span class="team-topic">Modeling Human Driving: Evaluating Predictions and Explaining Behavior</span>
+      </div>
+      <div class="team-date">2021&ndash;2026</div>
+    </div>
+    <div class="team-row">
+      <div>
+        <span class="team-name">Lucas Elbert Suryana</span> <span class="team-badge">PhD</span><br>
+        <span class="team-topic">Operationalising Meaningful Human Control for Reason-Responsive Decision-Making in Automated Vehicles</span>
+      </div>
+      <div class="team-date">2022&ndash;2026</div>
+    </div>
+    <div class="team-row">
+      <div>
+        <span class="team-name">Olger Siebinga</span> <span class="team-badge">PhD cum laude</span><br>
+        <span class="team-topic">Communication-Enabled Interactions in Highway Traffic: A Joint Driver Model for Merging</span>
+      </div>
+      <div class="team-date">2021&ndash;2024</div>
+    </div>
+
+    <h3>Postdocs &amp; Researchers</h3>
+
+    <div class="team-row">
+      <div><span class="team-name">Bhargav Nallapu</span>, postdoc</div>
+      <div class="team-date">2024&ndash;2025</div>
+    </div>
+    <div class="team-row">
+      <div><span class="team-name">Federico Scari</span>, research engineer</div>
+      <div class="team-date">2024&ndash;2025</div>
+    </div>
+    <div class="team-row">
+      <div><span class="team-name">Samir Mohammad</span>, research engineer</div>
+      <div class="team-date">2023&ndash;2024</div>
+    </div>
+
+    <h3>MSc Supervision</h3>
+    <p style="font-size:0.93rem; margin-top:0.2rem;">
+      Since 2021, I have supervised over 30 MSc thesis projects across multiple TU Delft faculties
+      (Mechanical Engineering, Robotics, Civil Engineering, EEMCS). Approximately half resulted in
+      peer-reviewed publications, and several students went on to pursue PhDs. Projects span driver
+      behavior modeling, meaningful human control, and human-robot interaction, as well as
+      interdisciplinary topics including rehabilitation robotics and AI alignment. One project
+      (Hagenus, 2024) was recognized as the
+      <strong>Best AI-related TU Delft MSc thesis of the year</strong>.
+    </p>
+  </section>
+
+  <!-- ─── Teaching ─── -->
+  <section id="teaching">
+    <h2>Teaching</h2>
+
+    <div class="teaching-row">
+      <div>
+        <div class="teaching-name">Internship Coordinator, MSc Robotics</div>
+        <div class="teaching-meta">~100 students per year</div>
+      </div>
+      <div class="teaching-year">2021&ndash;present</div>
+    </div>
+    <div class="teaching-row">
+      <div>
+        <div class="teaching-name">Robots and Society</div>
+        <div class="teaching-meta">Obligatory, 1st year MSc Robotics &middot; Q3 &middot; 150&ndash;200 students &middot; <em>invited lecture on meaningful human control</em></div>
+      </div>
+      <div class="teaching-year">2021&ndash;present</div>
+    </div>
+    <div class="teaching-row">
+      <div>
+        <div class="teaching-name">Human-Robot Interaction</div>
+        <div class="teaching-meta">Obligatory, 1st year MSc Robotics &middot; Q2 &middot; 150&ndash;200 students &middot; <em>invited lecture on human behavior modeling</em></div>
+      </div>
+      <div class="teaching-year">2021&ndash;present</div>
+    </div>
+    <div class="teaching-row">
+      <div>
+        <div class="teaching-name">Fundamentals of AI</div>
+        <div class="teaching-meta">Project component (5EC), all 2nd year MSc students &middot; Q1</div>
+      </div>
+      <div class="teaching-year">2021&ndash;2024</div>
+    </div>
+    <div class="teaching-row">
+      <div>
+        <div class="teaching-name">Applied Experimental Methods</div>
+        <div class="teaching-meta">Elective, 1st year MSc Robotics &middot; Q4</div>
+      </div>
+      <div class="teaching-year">2020&ndash;2023</div>
+    </div>
+  </section>
+
+  <!-- ─── Talks ─── -->
+  <section id="talks">
+    <h2>Selected Invited Talks</h2>
+
+    <div class="talk-row">
+      <div class="talk-title">"Driving together: Understanding interactive behavior of human drivers on highways through risk-based modeling"</div>
+      <div class="talk-venue">Keynote &middot; Workshop on Modeling Human road User Behavior, IEEE IAVVC &middot; Germany, 2025</div>
+    </div>
+    <div class="talk-row">
+      <div class="talk-title">"In the driver's mind: Cognitive modeling of human drivers in traffic interactions"</div>
+      <div class="talk-venue">Cognitive Systems Seminar &middot; Ulm University, Germany &middot; 2025</div>
+    </div>
+    <div class="talk-row">
+      <div class="talk-title">"Human Oversight and Meaningful Control over AI"</div>
+      <div class="talk-venue">Workshop on Paving the Way Towards Trustworthy and Safe AI &middot; ADRA Forum, Norway &middot; 2025</div>
+    </div>
+    <div class="talk-row">
+      <div class="talk-title">"Cognitive modeling of human driver behavior and its implications for automated vehicles"</div>
+      <div class="talk-venue">Invited talk &middot; European Commission Joint Research Centre, Italy &middot; 2025</div>
+    </div>
+    <div class="talk-row">
+      <div class="talk-title">"In the driver's mind: Cognitive modeling of human drivers"</div>
+      <div class="talk-venue">
+        Automotive Innovation Webinar &middot; SAE China &middot; 2024
+        &mdash; <span class="talk-highlight">26,000 live viewers</span>
+      </div>
+    </div>
+    <div class="talk-row">
+      <div class="talk-title">"Driver behavior in traffic interactions: A tougher testbed for computational cognitive models?"</div>
+      <div class="talk-venue">Center for Cognition, Action, and Perception &middot; University of Cincinnati, USA &middot; 2022</div>
+    </div>
+  </section>
+
+  <!-- ─── Service ─── -->
+  <section id="service">
+    <h2>Scientific Leadership &amp; Service</h2>
+
+    <div class="service-row">
+      <div class="service-role">Lead Organizer</div>
+      <div><a href="https://roadusermodels.github.io/" target="_blank">International Workshop on Modeling Human road User Behavior for Automated Vehicle Evaluation</a> (2026)</div>
+    </div>
+    <div class="service-row">
+      <div class="service-role">Steering Committee</div>
+      <div>International Workshop on Modeling Human road User Behavior for Automated Vehicle Evaluation (2024&ndash;present)</div>
+    </div>
+    <div class="service-row">
+      <div class="service-role">Task Force Member</div>
+      <div><a href="https://standardsworks.sae.org/standards-committees/j3330-task-force" target="_blank">SAE Task Force J3330</a> &mdash; Recommended Practice on Behavior Reference Models for Evaluating Automated Driving Systems (2024&ndash;present)</div>
+    </div>
+    <div class="service-row">
+      <div class="service-role">Associate Editor</div>
+      <div>IEEE Intelligent Transportation Systems Conference (2026)</div>
+    </div>
+    <div class="service-row">
+      <div class="service-role">Grant Reviewer</div>
+      <div>National Science Center, Poland (2026)</div>
+    </div>
+    <div class="service-row">
+      <div class="service-role">PhD Committee</div>
+      <div>Andres Laverde Marin, Universitat Politecnica de Valencia (2026)</div>
+    </div>
+    <div class="service-row">
+      <div class="service-role">Reviewer</div>
+      <div>IEEE Transactions/Conference on Intelligent Transportation Systems, ACM/IEEE HRI, Transportation Research Parts A/C/F, Psychological Science, Cognition, Human Factors, and others</div>
+    </div>
+  </section>
+
+  <!-- ─── Media ─── -->
+  <section id="media">
+    <h2>Media Coverage</h2>
+    <p>
+      My research has attracted broad media coverage, particularly following the deployment of the
+      <a href="https://waymo.com/blog/2026/06/reference-driver/" target="_blank">Waymo Reference Driver</a>
+      in 2026. Articles appeared in major tech and science outlets including
+      <a href="https://www.theverge.com/transportation/947178/waymo-reference-driver-model-surprise-avoid-collision" target="_blank">The Verge</a>,
+      <a href="https://techcrunch.com/2026/06/10/waymo-says-it-built-a-better-benchmark-for-comparing-robotaxis-to-humans/" target="_blank">TechCrunch</a>, and
+      <a href="https://www.engadget.com/2191225/waymo-made-a-virtual-human-driver-to-improve-its-robotaxis/" target="_blank">Engadget</a>,
+      as well as Dutch media including <em>Algemeen Dagblad</em> and
+      <a href="https://www.nemokennislink.nl/publicaties/drempels-op-de-weg-voor-robotauto/" target="_blank"><em>Nemo Kennislink</em></a>.
+      Earlier work on human-inspired models for self-driving cars was covered in
+      <a href="https://delta.tudelft.nl/en/article/new-mathematical-model-for-autonomous-driving-thinks-like-a-human" target="_blank">Delta</a>
+      and multiple TU Delft press releases.
+    </p>
+  </section>
+
+  <footer>
+    <p>
+      Arkady Zgonnikov &middot; Delft University of Technology &middot;
+      <a href="mailto:a.zgonnikov@tudelft.nl">a.zgonnikov@tudelft.nl</a>
+    </p>
+  </footer>
+
+</div>
+</body>
+</html>
