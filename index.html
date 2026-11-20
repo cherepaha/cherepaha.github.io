@@ -4,619 +4,660 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Arkady Zgonnikov</title>
-  <meta name="description" content="Arkady Zgonnikov — Assistant Professor, Department of Cognitive Robotics, TU Delft. Cognitive and computational models of human behavior in traffic.">
+  <meta name="description" content="Arkady Zgonnikov — high-fidelity models of human driver behavior, for understanding the human mind and evaluating the safety of automated vehicles. TU Delft.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script>document.documentElement.classList.add('js');</script>
   <style>
     :root {
-      --accent:       #083e70;
-      --accent-light: #1464a8;
-      --text:         #1a2535;
-      --muted:        #5b6e84;
-      --border:       #d6e2ef;
-      --bg:           #ffffff;
-      --bg-subtle:    #f3f7fc;
-      --width:        740px;
+      --accent:      #083e70;
+      --accent-mid:  #1464a8;
+      --text:        #1a2535;
+      --muted:       #5b6e84;
+      --faint:       #9aa9ba;
+      --border:      #d6e2ef;
+      --bg:          #ffffff;
+      --bg-card:     #f3f7fc;
+      --width:       780px;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html { scroll-behavior: smooth; }
-
     body {
       font-family: 'Inter', sans-serif;
-      font-weight: 400;
       font-size: 15.5px;
       line-height: 1.72;
       color: var(--text);
       background: var(--bg);
     }
 
-    a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-    a:hover {
-      color: var(--accent-light);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-mid); text-decoration: underline; text-underline-offset: 3px; }
+    em { font-style: italic; }
+    strong { font-weight: 600; }
 
-    /* ─── Layout ─── */
-    .wrap {
-      max-width: var(--width);
-      margin: 0 auto;
-      padding: 0 1.6rem;
-    }
+    .wrap { max-width: var(--width); margin: 0 auto; padding: 0 1.6rem; }
 
     /* ─── Header ─── */
-    header {
-      padding: 3.8rem 0 0;
-    }
+    header { padding-top: 3.8rem; }
+    .header-inner { display: flex; align-items: flex-start; gap: 2.8rem; }
+    .header-text { flex: 1; min-width: 0; }
 
     .name {
       font-family: 'Cormorant Garamond', serif;
-      font-weight: 600;
-      font-size: 3rem;
-      letter-spacing: -0.02em;
-      line-height: 1.08;
-      color: var(--text);
+      font-weight: 600; font-size: 3rem; letter-spacing: -0.02em; line-height: 1.05;
       margin-bottom: 0.6rem;
     }
-
     .tagline {
-      font-size: 0.95rem;
-      color: var(--muted);
-      font-weight: 400;
-      line-height: 1.6;
-      margin-bottom: 1.2rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 1.28rem; line-height: 1.45; color: var(--muted);
+      margin-bottom: 1.1rem;
     }
+    .affil { font-size: 0.85rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.1rem; }
+    .affil a { color: var(--muted); border-bottom: 1px solid var(--border); }
+    .affil a:hover { color: var(--accent); border-color: var(--accent); text-decoration: none; }
+    .contact-links { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; font-size: 0.84rem; font-weight: 500; }
 
-    .contact-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.3rem 1.2rem;
-      font-size: 0.88rem;
-      margin-bottom: 0;
-    }
-    .contact-links a { font-weight: 500; }
-
-    /* ─── Header photo layout ─── */
-    .header-top {
-      display: flex;
-      align-items: flex-start;
-      gap: 2.4rem;
-      margin-bottom: 1.8rem;
-    }
-    .header-text { flex: 1; min-width: 0; }
     .headshot {
-      width: 148px;
-      aspect-ratio: 1 / 1.56;
-      object-fit: cover;
-      object-position: center top;
-      border-radius: 3px;
-      flex-shrink: 0;
-      display: block;
+      width: 148px; aspect-ratio: 1 / 1.56; object-fit: cover; object-position: center top;
+      border-radius: 3px; flex-shrink: 0; display: block;
     }
 
-    /* section jump nav */
-    .jump-nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0 0;
-      border-top: 1px solid var(--border);
+    /* ─── Tabs ─── */
+    .tabs {
+      display: flex; gap: 1.9rem; margin-top: 2.6rem;
       border-bottom: 1px solid var(--border);
-      margin-bottom: 0;
+      overflow-x: auto; scrollbar-width: none;
     }
-    .jump-nav a {
-      display: inline-block;
-      padding: 0.55rem 0.9rem 0.55rem 0;
-      margin-right: 1rem;
-      font-size: 0.82rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      border-bottom: 2px solid transparent;
-      transition: color 0.15s, border-color 0.15s;
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab {
+      appearance: none; background: none; border: none; font: inherit;
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted); padding: 0.8rem 0 0.75rem;
+      border-bottom: 2px solid transparent; margin-bottom: -1px;
+      cursor: pointer; white-space: nowrap; transition: color 0.15s, border-color 0.15s;
     }
-    .jump-nav a:hover {
-      color: var(--accent);
-      border-bottom-color: var(--accent);
-      text-decoration: none;
-    }
+    .tab:hover { color: var(--accent); }
+    .tab[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+    .tab:focus-visible { outline: 2px solid var(--accent-mid); outline-offset: 2px; }
 
-    /* ─── Sections ─── */
-    section {
-      padding: 2.4rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-    section:last-of-type { border-bottom: none; }
+    .panel { padding: 2.6rem 0 3rem; }
+    html:not(.js) .panel + .panel { border-top: 1px solid var(--border); }
+    html:not(.js) .tabs { display: none; }
+    .js .panel[hidden] { display: none; }
+    .js .panel { animation: fade 0.25s ease; }
+    @keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 
+    /* ─── Type ─── */
     h2 {
       font-family: 'Cormorant Garamond', serif;
-      font-weight: 500;
-      font-size: 1.55rem;
-      color: var(--text);
-      margin-bottom: 1.1rem;
-      padding-left: 0.8rem;
-      border-left: 3px solid var(--accent);
-      margin-left: -0.8rem;
-      line-height: 1.2;
+      font-weight: 500; font-size: 1.6rem; line-height: 1.2; margin-bottom: 1rem;
     }
-
     h3 {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--muted);
-      margin: 1.6rem 0 0.7rem;
+      font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--muted); margin: 2.6rem 0 1rem;
     }
-    h3:first-child { margin-top: 0; }
-
-    p { margin-bottom: 0.75rem; }
+    p { margin-bottom: 0.85rem; }
     p:last-child { margin-bottom: 0; }
+    .lead {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.34rem; line-height: 1.5; margin-bottom: 1.2rem;
+    }
+    .small { font-size: 0.88rem; color: var(--muted); }
 
-    strong { font-weight: 600; }
+    /* ─── Question shift ─── */
+    .shift {
+      margin: 2.2rem 0; padding: 1.6rem 1.8rem;
+      background: var(--bg-card); border-left: 3px solid var(--accent);
+    }
+    .shift-label {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 0.15rem;
+    }
+    .shift-q {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; line-height: 1.35;
+    }
+    .shift-q.old { color: var(--faint); text-decoration: line-through; text-decoration-thickness: 1px; margin-bottom: 0.9rem; }
+    .shift-q.new { font-weight: 600; color: var(--accent); }
 
-    /* ─── Positions ─── */
-    .position {
-      margin-bottom: 1.1rem;
+    /* ─── Research lines ─── */
+    .line {
+      display: grid; grid-template-columns: 52px 1fr; gap: 0 1.4rem;
+      padding: 1.6rem 0; border-bottom: 1px solid var(--border);
     }
-    .position:last-child { margin-bottom: 0; }
-    .pos-title {
-      font-weight: 600;
-      font-size: 0.95rem;
+    .line:first-of-type { padding-top: 0.2rem; }
+    .line:last-of-type { border-bottom: none; }
+    .line-num {
+      font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; line-height: 1;
+      color: var(--accent); font-weight: 500;
     }
-    .pos-org {
-      font-size: 0.93rem;
-      margin: 0.05rem 0;
+    .line-title {
+      font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 1.25rem;
+      line-height: 1.3; margin-bottom: 0.45rem;
     }
-    .pos-date {
-      font-size: 0.83rem;
-      color: var(--muted);
-    }
-
-    /* ─── Education ─── */
-    .edu-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      flex-wrap: wrap;
-      gap: 0.1rem 1rem;
-      padding: 0.5rem 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.94rem;
-    }
-    .edu-row:last-child { border-bottom: none; }
-    .edu-degree { font-weight: 600; }
-    .edu-meta { color: var(--muted); font-size: 0.84rem; white-space: nowrap; }
-
-    /* ─── Team ─── */
-    .team-row {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 0.2rem 1.2rem;
-      padding: 0.55rem 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.93rem;
-      align-items: start;
-    }
-    .team-row:last-child { border-bottom: none; }
-    .team-name { font-weight: 600; }
-    .team-topic { color: var(--muted); font-size: 0.86rem; }
-    .team-badge {
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: var(--accent);
-      background: var(--bg-subtle);
-      border: 1px solid var(--border);
-      padding: 0.1em 0.45em;
-      border-radius: 3px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      white-space: nowrap;
-      display: inline-block;
-      margin-left: 0.4em;
-      vertical-align: middle;
-    }
-    .team-date {
-      color: var(--muted);
-      font-size: 0.83rem;
-      text-align: right;
-      padding-top: 0.1rem;
+    .line p { font-size: 0.92rem; color: var(--text); }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.7rem; }
+    .tag {
+      font-size: 0.72rem; font-weight: 500; color: var(--accent);
+      background: var(--bg-card); border: 1px solid var(--border);
+      padding: 0.1em 0.55em; border-radius: 2px;
     }
 
-    /* ─── Teaching ─── */
-    .teaching-row {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 0.1rem 1.2rem;
-      padding: 0.55rem 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.93rem;
-      align-items: start;
+    /* ─── Future ─── */
+    .future { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
+    .future-item { border-top: 3px solid var(--accent); padding-top: 0.8rem; }
+    .future-title {
+      font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 1.12rem;
+      line-height: 1.3; margin-bottom: 0.4rem;
     }
-    .teaching-row:last-child { border-bottom: none; }
-    .teaching-name { font-weight: 600; }
-    .teaching-meta { color: var(--muted); font-size: 0.84rem; }
-    .teaching-year { color: var(--muted); font-size: 0.83rem; text-align: right; }
+    .future-item p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
 
-    /* ─── Talks ─── */
-    .talk-row {
-      padding: 0.6rem 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.93rem;
+    /* ─── Impact ─── */
+    .feature {
+      background: var(--bg-card); padding: 1.6rem 1.8rem; border-top: 3px solid var(--accent);
+      margin-bottom: 2.4rem;
     }
-    .talk-row:last-child { border-bottom: none; }
-    .talk-title { font-style: italic; margin-bottom: 0.15rem; }
-    .talk-venue { color: var(--muted); font-size: 0.84rem; }
-    .talk-highlight {
-      font-weight: 600;
-      font-style: normal;
-      color: var(--accent);
+    .feature-kicker {
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 0.3rem;
+    }
+    .feature-title {
+      font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 1.5rem;
+      line-height: 1.25; margin-bottom: 0.6rem;
+    }
+    .feature p { font-size: 0.93rem; }
+    .links { display: flex; flex-wrap: wrap; gap: 0.2rem 1rem; font-size: 0.8rem; font-weight: 500; margin-top: 0.8rem; }
+    .links a::before { content: "→ "; }
+
+    .partners { display: grid; grid-template-columns: 150px 1fr; gap: 0; }
+    .partners > div { padding: 0.75rem 0; border-bottom: 1px solid var(--border); font-size: 0.92rem; }
+    .partners > div:nth-last-child(-n+2) { border-bottom: none; }
+    .p-label {
+      font-size: 0.72rem !important; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted); padding-top: 0.95rem !important;
     }
 
-    /* ─── Service ─── */
-    .service-row {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 0.1rem 0.8rem;
-      padding: 0.5rem 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.93rem;
+    /* ─── People ─── */
+    .team-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 2rem; }
+    .member { padding: 0.6rem 0; border-bottom: 1px solid var(--border); }
+    .m-name { font-weight: 600; font-size: 0.92rem; }
+    .m-note { font-weight: 400; font-size: 0.8rem; color: var(--muted); }
+    .m-topic { font-size: 0.83rem; color: var(--muted); line-height: 1.45; }
+    .badge {
+      font-size: 0.66rem; font-weight: 600; color: var(--accent);
+      background: var(--bg-card); border: 1px solid var(--border);
+      padding: 0.08em 0.4em; border-radius: 2px;
+      text-transform: uppercase; letter-spacing: 0.03em; margin-left: 0.3em; vertical-align: middle;
     }
-    .service-row:last-child { border-bottom: none; }
-    .service-role {
-      font-weight: 600;
-      white-space: nowrap;
-      color: var(--accent);
-      font-size: 0.84rem;
-      padding-top: 0.12rem;
+
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
+    .stat { border-left: 2px solid var(--border); padding-left: 1rem; }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif; font-size: 2.1rem; font-weight: 500;
+      line-height: 1.1; color: var(--accent);
     }
+    .stat-label { font-size: 0.84rem; color: var(--muted); line-height: 1.5; }
+
+    /* ─── Pull quote ─── */
+    .quote {
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: 1.45rem; line-height: 1.4; color: var(--accent);
+      padding: 0.2rem 0 0.2rem 1.4rem; border-left: 3px solid var(--accent);
+      margin: 1.8rem 0;
+    }
+
+    /* ─── Rows ─── */
+    .rows .row {
+      display: grid; grid-template-columns: 1fr auto; gap: 0.1rem 1.5rem;
+      padding: 0.65rem 0; border-bottom: 1px solid var(--border); font-size: 0.92rem;
+    }
+    .rows .row:last-child { border-bottom: none; }
+    .row-title { font-weight: 600; }
+    .row-meta { font-size: 0.85rem; color: var(--muted); }
+    .row-when { font-size: 0.82rem; color: var(--muted); text-align: right; white-space: nowrap; }
+
+    /* ─── Timeline ─── */
+    .timeline { position: relative; margin-left: 0.4rem; padding-left: 1.6rem; border-left: 2px solid var(--border); }
+    .t-item { position: relative; padding-bottom: 1.3rem; }
+    .t-item:last-child { padding-bottom: 0; }
+    .t-item::before {
+      content: ""; position: absolute; left: calc(-1.6rem - 6px); top: 0.45rem;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--bg); border: 2px solid var(--accent);
+    }
+    .t-item:last-child::before { background: var(--accent); }
+    .t-year { font-size: 0.78rem; font-weight: 600; color: var(--accent); letter-spacing: 0.04em; }
+    .t-text { font-size: 0.92rem; }
 
     /* ─── Footer ─── */
-    footer {
-      padding: 2.2rem 0;
-      text-align: center;
-      font-size: 0.82rem;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
-    }
+    footer { padding: 2rem 0 2.4rem; border-top: 1px solid var(--border); text-align: center; font-size: 0.82rem; color: var(--muted); }
     footer a { color: var(--muted); }
-    footer a:hover { color: var(--accent); }
 
     /* ─── Responsive ─── */
-    @media (max-width: 580px) {
+    @media (max-width: 640px) {
       .name { font-size: 2.3rem; }
-      .header-top { flex-direction: column-reverse; align-items: center; text-align: center; }
+      .header-inner { flex-direction: column-reverse; align-items: center; }
       .headshot { width: 110px; }
-      .contact-links { justify-content: center; }
-      .team-row, .teaching-row, .service-row { grid-template-columns: 1fr; }
-      .team-date, .teaching-year { text-align: left; }
-      .jump-nav a { font-size: 0.75rem; margin-right: 0.6rem; }
+      .tabs { gap: 0.6rem; justify-content: space-between; }
+      .tab { font-size: 0.66rem; letter-spacing: 0.03em; }
+      .shift { padding: 1.2rem 1.2rem; }
+      .shift-q { font-size: 1.2rem; }
+      .line { grid-template-columns: 1fr; gap: 0.2rem; }
+      .future, .stats, .team-grid { grid-template-columns: 1fr; }
+      .partners { grid-template-columns: 1fr; }
+      .partners > div { border-bottom: none; padding: 0.15rem 0; }
+      .p-label { padding-top: 0.9rem !important; }
+      .rows .row { grid-template-columns: 1fr; }
+      .row-when { text-align: left; }
+      .feature { padding: 1.2rem; }
     }
   </style>
 </head>
 <body>
-
 <div class="wrap">
 
   <header>
-    <div class="header-top">
+    <div class="header-inner">
       <div class="header-text">
         <h1 class="name">Arkady Zgonnikov</h1>
-        <p class="tagline">
+        <p class="tagline">What would a careful and competent human driver do? I build models that answer this question — to understand the human mind, and to hold automated vehicles to a human standard.</p>
+        <p class="affil">
           Assistant Professor &middot; Department of Cognitive Robotics, TU Delft<br>
-          Director for Partnerships, <a href="https://www.tudelft.nl/centre-for-meaningful-human-control">Centre for Meaningful Human Control</a>
-          &middot; Co-director, <a href="https://www.tudelft.nl/en/ai/herald-lab">HERALD Lab</a>
+          Director for Partnerships &middot; <a href="https://www.tudelft.nl/centre-for-meaningful-human-control" target="_blank">Centre for Meaningful Human Control</a><br>
+          Co-director &middot; <a href="https://www.tudelft.nl/en/ai/herald-lab" target="_blank">HERALD Lab</a>
         </p>
         <div class="contact-links">
           <a href="mailto:a.zgonnikov@tudelft.nl">a.zgonnikov@tudelft.nl</a>
-          <a href="https://github.com/cherepaha" target="_blank">GitHub</a>
           <a href="https://scholar.google.com/citations?user=QN82ZIcAAAAJ&hl=en" target="_blank">Google Scholar</a>
+          <a href="https://github.com/cherepaha" target="_blank">GitHub</a>
         </div>
       </div>
       <img src="photo_AZ_crop_fixed.jpg" alt="Arkady Zgonnikov" class="headshot">
     </div>
-    <nav class="jump-nav">
-      <a href="#research">Research</a>
-      <a href="#positions">Positions</a>
-      <a href="#team">Team</a>
-      <a href="#teaching">Teaching</a>
-      <a href="#talks">Talks</a>
-      <a href="#service">Service</a>
-      <a href="#media">Media</a>
+
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <button class="tab" role="tab" id="tab-research" aria-controls="panel-research" data-tab="research">Research</button>
+      <button class="tab" role="tab" id="tab-impact" aria-controls="panel-impact" data-tab="impact">Impact</button>
+      <button class="tab" role="tab" id="tab-team" aria-controls="panel-team" data-tab="team">Team</button>
+      <button class="tab" role="tab" id="tab-teaching" aria-controls="panel-teaching" data-tab="teaching">Teaching</button>
+      <button class="tab" role="tab" id="tab-community" aria-controls="panel-community" data-tab="community">Community</button>
     </nav>
   </header>
 
-  <!-- ─── Research ─── -->
-  <section id="research">
-    <h2>Research</h2>
-    <p>
-      I develop cognitive and computational models of human behavior in traffic, with a focus on how drivers
-      make decisions under uncertainty when interacting with automated vehicles. My work bridges cognitive
-      neuroscience, human factors, and AI, contributing to safer, more human-compatible autonomous driving systems.
-    </p>
-    <p>
-      I publish in <strong>intelligent transportation</strong>
-      (Transportation Research Part F, IEEE Transactions on Intelligent Transportation Systems,
-      Accident Analysis and Prevention),
-      <strong>general science journals</strong>
-      (Nature Communications, PNAS Nexus, Royal Society Open Science),
-      and <strong>cognitive science &amp; computer science</strong> venues
-      (Computational Brain and Behavior, Human Factors, IJCAI, ECAI, AAMAS).
-    </p>
-  </section>
+  <main>
 
-  <!-- ─── Positions ─── -->
-  <section id="positions">
-    <h2>Academic Positions</h2>
+    <!-- ═══════════ RESEARCH ═══════════ -->
+    <section class="panel" id="panel-research" role="tabpanel" aria-labelledby="tab-research">
+      <p class="lead">
+        Automated vehicles are already on our streets. The hard question is no longer whether
+        they can drive — it is whether they drive <em>well enough</em>.
+      </p>
+      <p>
+        Regulations and industry practice ask automated vehicles to be at least as safe as a careful
+        and competent human driver. That is an intuitive benchmark, but turning it into concrete,
+        measurable requirements needs models that capture how people actually perceive, decide, and
+        act in complex, dynamic, high-stakes situations. Driver models have been around since the
+        1930s, yet they still fall short of the richness and variability of real human driving.
+      </p>
+      <p>
+        I combine <strong>cognitive science</strong> with <strong>robotics</strong> and
+        <strong>AI</strong> to build high-fidelity models of human driver behavior. These models
+        do two jobs at once: they advance our fundamental understanding of the human mind, and they
+        provide scientifically grounded safety references for those who develop and regulate
+        automated vehicles. Throughout, I am guided by the principle of
+        <strong>meaningful human control</strong> — increasingly capable autonomous systems should
+        remain aligned with human intentions, norms, and values, including the most basic one: safety.
+      </p>
 
-    <h3>Current</h3>
-
-    <div class="position">
-      <div class="pos-title">Assistant Professor</div>
-      <div class="pos-org">Department of Cognitive Robotics, Faculty of Mechanical Engineering, Delft University of Technology</div>
-      <div class="pos-date">November 2020 &ndash; present</div>
-    </div>
-
-    <div class="position">
-      <div class="pos-title">Director for Partnerships and Collaborations</div>
-      <div class="pos-org"><a href="https://www.tudelft.nl/centre-for-meaningful-human-control">Centre for Meaningful Human Control</a>, TU Delft</div>
-      <div class="pos-date">October 2024 &ndash; present</div>
-    </div>
-
-    <div class="position">
-      <div class="pos-title">Co-director</div>
-      <div class="pos-org"><a href="https://www.tudelft.nl/en/ai/herald-lab">HERALD Lab</a>, Delft University of Technology</div>
-      <div class="pos-date">February 2021 &ndash; present</div>
-    </div>
-
-    <h3>Previous</h3>
-
-    <div class="position">
-      <div class="pos-title">Postdoctoral Researcher</div>
-      <div class="pos-org"><a href="https://www.tudelft.nl/aitech">AiTech</a> and Department of Cognitive Robotics, Delft University of Technology</div>
-      <div class="pos-date">June 2019 &ndash; November 2020</div>
-    </div>
-
-    <div class="position">
-      <div class="pos-title">Postdoctoral Researcher</div>
-      <div class="pos-org">School of Computer Science and Engineering, University of Aizu</div>
-      <div class="pos-date">October 2014 &ndash; September 2015 &middot; August 2017 &ndash; March 2019</div>
-    </div>
-
-    <div class="position">
-      <div class="pos-title">Postdoctoral Researcher</div>
-      <div class="pos-org">School of Psychology, University of Galway</div>
-      <div class="pos-date">October 2015 &ndash; August 2017</div>
-    </div>
-
-    <h3>Education</h3>
-
-    <div class="edu-row">
-      <div>
-        <span class="edu-degree">Ph.D.</span> in Computer Science and Engineering<br>
-        <span style="color:var(--muted); font-size:0.88rem;">University of Aizu, Japan</span>
+      <div class="shift">
+        <div class="shift-label">The question is shifting from</div>
+        <div class="shift-q old">Can we build a vehicle that drives itself?</div>
+        <div class="shift-label">to</div>
+        <div class="shift-q new">Can we build an automated vehicle that is safe enough?</div>
       </div>
-      <div class="edu-meta">2011&ndash;2014</div>
-    </div>
-    <div class="edu-row">
-      <div>
-        <span class="edu-degree">Specialist (M.Sc.)</span> in Applied Mathematics and Computer Science<br>
-        <span style="color:var(--muted); font-size:0.88rem;">Saint-Petersburg State University, Russia</span>
+
+      <h3>Three research lines</h3>
+
+      <div class="line">
+        <div class="line-num">01</div>
+        <div>
+          <div class="line-title">From cognitive science to driver behavior</div>
+          <p>
+            How do drivers choose between competing actions — turn in front of an approaching car,
+            or wait for it to pass? I established a new direction in driver behavior research by
+            bringing in <strong>evidence accumulation models</strong> from cognitive neuroscience,
+            together with new model architectures and experimental paradigms for measuring cognitive
+            processes during driving. This work built a bridge between fundamental research on human
+            decision-making and the study of driving.
+          </p>
+          <div class="tags"><span class="tag">evidence accumulation</span><span class="tag">gap acceptance</span><span class="tag">overtaking</span><span class="tag">response times</span></div>
+        </div>
       </div>
-      <div class="edu-meta">2004&ndash;2009</div>
-    </div>
-  </section>
 
-  <!-- ─── Team ─── -->
-  <section id="team">
-    <h2>Research Team and Alumni</h2>
-
-    <h3>PhD Candidates</h3>
-
-    <div class="team-row">
-      <div>
-        <span class="team-name">Ashwin George</span><br>
-        <span class="team-topic">Quantifying Responsibility in Spatial Multi-Agent Interactions</span>
+      <div class="line">
+        <div class="line-num">02</div>
+        <div>
+          <div class="line-title">Unified models of driving</div>
+          <p>
+            Isolated decisions are only part of the story. By combining theories of human cognition
+            with robotics techniques such as model-predictive control, I develop
+            <strong>unified, closed-loop models</strong> that capture driving behavior across
+            scenarios. With Nissan, this led to models grounded in <strong>risk homeostasis
+            theory</strong>, progressing from simulator experiments to real-world traffic data. With
+            Waymo, it led to a framework grounded in <strong>active inference</strong>, culminating in
+            a collision-avoidance model with unprecedented generalization capabilities.
+          </p>
+          <div class="tags"><span class="tag">active inference</span><span class="tag">risk homeostasis</span><span class="tag">communication-enabled interaction</span><span class="tag">model-predictive control</span></div>
+        </div>
       </div>
-      <div class="team-date">2021&ndash;2026</div>
-    </div>
-    <div class="team-row">
-      <div>
-        <span class="team-name">Sahel Akbari</span> <span style="font-size:0.84rem;color:var(--muted);">(Erasmus MC)</span><br>
-        <span class="team-topic">Advancing Data-Driven Methods for Assessment of Upper-Extremity Movements Post-Stroke</span>
-      </div>
-      <div class="team-date">2023&ndash;present</div>
-    </div>
-    <div class="team-row">
-      <div>
-        <span class="team-name">Julian Schumann</span> <span class="team-badge">PhD cum laude</span><br>
-        <span class="team-topic">Modeling Human Driving: Evaluating Predictions and Explaining Behavior</span>
-      </div>
-      <div class="team-date">2021&ndash;2026</div>
-    </div>
-    <div class="team-row">
-      <div>
-        <span class="team-name">Lucas Elbert Suryana</span> <span class="team-badge">PhD</span><br>
-        <span class="team-topic">Operationalising Meaningful Human Control for Reason-Responsive Decision-Making in Automated Vehicles</span>
-      </div>
-      <div class="team-date">2022&ndash;2026</div>
-    </div>
-    <div class="team-row">
-      <div>
-        <span class="team-name">Olger Siebinga</span> <span class="team-badge">PhD cum laude</span><br>
-        <span class="team-topic">Communication-Enabled Interactions in Highway Traffic: A Joint Driver Model for Merging</span>
-      </div>
-      <div class="team-date">2021&ndash;2024</div>
-    </div>
 
-    <h3>Postdocs &amp; Researchers</h3>
-
-    <div class="team-row">
-      <div><span class="team-name">Bhargav Nallapu</span>, postdoc</div>
-      <div class="team-date">2024&ndash;2025</div>
-    </div>
-    <div class="team-row">
-      <div><span class="team-name">Federico Scari</span>, research engineer</div>
-      <div class="team-date">2024&ndash;2025</div>
-    </div>
-    <div class="team-row">
-      <div><span class="team-name">Samir Mohammad</span>, research engineer</div>
-      <div class="team-date">2023&ndash;2024</div>
-    </div>
-
-    <h3>MSc Supervision</h3>
-    <p style="font-size:0.93rem; margin-top:0.2rem;">
-      Since 2021, I have supervised over 30 MSc thesis projects across multiple TU Delft faculties
-      (Mechanical Engineering, Robotics, Civil Engineering, EEMCS). Approximately half resulted in
-      peer-reviewed publications, and several students went on to pursue PhDs. Projects span driver
-      behavior modeling, meaningful human control, and human-robot interaction, as well as
-      interdisciplinary topics including rehabilitation robotics and AI alignment. One project
-      (Hagenus, 2024) was recognized as the
-      <strong>Best AI-related TU Delft MSc thesis of the year</strong>.
-    </p>
-  </section>
-
-  <!-- ─── Teaching ─── -->
-  <section id="teaching">
-    <h2>Teaching</h2>
-
-    <div class="teaching-row">
-      <div>
-        <div class="teaching-name">Internship Coordinator, MSc Robotics</div>
-        <div class="teaching-meta">~100 students per year</div>
+      <div class="line">
+        <div class="line-num">03</div>
+        <div>
+          <div class="line-title">Meaningful human control over automated vehicles</div>
+          <p>
+            Here I connect philosophical work on control and responsibility with hands-on empirical
+            research on automated driving: developing methods for assessing whether — and to what
+            extent — humans retain <strong>meaningful control</strong> over automated vehicles, and
+            for <strong>quantifying responsibility</strong> in interactions between humans and AVs.
+            This line provides the ethical foundation for the rest of my work.
+          </p>
+          <div class="tags"><span class="tag">meaningful human control</span><span class="tag">responsibility</span><span class="tag">ethics of technology</span></div>
+        </div>
       </div>
-      <div class="teaching-year">2021&ndash;present</div>
-    </div>
-    <div class="teaching-row">
-      <div>
-        <div class="teaching-name">Robots and Society</div>
-        <div class="teaching-meta">Obligatory, 1st year MSc Robotics &middot; Q3 &middot; 150&ndash;200 students &middot; <em>invited lecture on meaningful human control</em></div>
-      </div>
-      <div class="teaching-year">2021&ndash;present</div>
-    </div>
-    <div class="teaching-row">
-      <div>
-        <div class="teaching-name">Human-Robot Interaction</div>
-        <div class="teaching-meta">Obligatory, 1st year MSc Robotics &middot; Q2 &middot; 150&ndash;200 students &middot; <em>invited lecture on human behavior modeling</em></div>
-      </div>
-      <div class="teaching-year">2021&ndash;present</div>
-    </div>
-    <div class="teaching-row">
-      <div>
-        <div class="teaching-name">Fundamentals of AI</div>
-        <div class="teaching-meta">Project component (5EC), all 2nd year MSc students &middot; Q1</div>
-      </div>
-      <div class="teaching-year">2021&ndash;2024</div>
-    </div>
-    <div class="teaching-row">
-      <div>
-        <div class="teaching-name">Applied Experimental Methods</div>
-        <div class="teaching-meta">Elective, 1st year MSc Robotics &middot; Q4</div>
-      </div>
-      <div class="teaching-year">2020&ndash;2023</div>
-    </div>
-  </section>
 
-  <!-- ─── Talks ─── -->
-  <section id="talks">
-    <h2>Selected Invited Talks</h2>
+      <p class="small" style="margin-top:1.4rem;">
+        <strong style="color:var(--text);">Beyond the core.</strong> I also enjoy exploring adjacent
+        areas: methods and open-source tools for evaluating trajectory prediction models and
+        interaction-aware controllers, novel AV algorithms, fundamental AI methods, and — with
+        colleagues at Erasmus MC — human-centered AI for neurorehabilitation.
+      </p>
 
-    <div class="talk-row">
-      <div class="talk-title">"Driving together: Understanding interactive behavior of human drivers on highways through risk-based modeling"</div>
-      <div class="talk-venue">Keynote &middot; Workshop on Modeling Human road User Behavior, IEEE IAVVC &middot; Germany, 2025</div>
-    </div>
-    <div class="talk-row">
-      <div class="talk-title">"In the driver's mind: Cognitive modeling of human drivers in traffic interactions"</div>
-      <div class="talk-venue">Cognitive Systems Seminar &middot; Ulm University, Germany &middot; 2025</div>
-    </div>
-    <div class="talk-row">
-      <div class="talk-title">"Human Oversight and Meaningful Control over AI"</div>
-      <div class="talk-venue">Workshop on Paving the Way Towards Trustworthy and Safe AI &middot; ADRA Forum, Norway &middot; 2025</div>
-    </div>
-    <div class="talk-row">
-      <div class="talk-title">"Cognitive modeling of human driver behavior and its implications for automated vehicles"</div>
-      <div class="talk-venue">Invited talk &middot; European Commission Joint Research Centre, Italy &middot; 2025</div>
-    </div>
-    <div class="talk-row">
-      <div class="talk-title">"In the driver's mind: Cognitive modeling of human drivers"</div>
-      <div class="talk-venue">
-        Automotive Innovation Webinar &middot; SAE China &middot; 2024
-        &mdash; <span class="talk-highlight">26,000 live viewers</span>
+      <h3>The next ten years</h3>
+      <p style="margin-bottom:1.3rem;">
+        My aim is to build a <strong>science of human-referenced evaluation for autonomous
+        systems</strong>, along three directions:
+      </p>
+      <div class="future">
+        <div class="future-item">
+          <div class="future-title">Deeper models of the driving mind</div>
+          <p>How should visual attention enter models of driving? What role does metacognition play? How far can one cognitive model generalize — and can machine learning make such models scale without losing their explanatory power?</p>
+        </div>
+        <div class="future-item">
+          <div class="future-title">From models to evaluation tools</div>
+          <p>Public-domain behavior reference models and AV evaluation methods that policymakers, certification authorities, and consumer testing organizations can use directly.</p>
+        </div>
+        <div class="future-item">
+          <div class="future-title">Ethical behavior references</div>
+          <p>Real driving involves trade-offs between safety, comfort, efficiency, and social norms. Models of how people navigate them can let us evaluate not only how safely an AV drives, but how it handles conflicts between human values.</p>
+        </div>
       </div>
-    </div>
-    <div class="talk-row">
-      <div class="talk-title">"Driver behavior in traffic interactions: A tougher testbed for computational cognitive models?"</div>
-      <div class="talk-venue">Center for Cognition, Action, and Perception &middot; University of Cincinnati, USA &middot; 2022</div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ─── Service ─── -->
-  <section id="service">
-    <h2>Scientific Leadership &amp; Service</h2>
+    <!-- ═══════════ IMPACT ═══════════ -->
+    <section class="panel" id="panel-impact" role="tabpanel" aria-labelledby="tab-impact">
+      <p class="lead">
+        I find it particularly rewarding to see fundamental research turned into tools that are used
+        in the real world — so I have deliberately built partnerships across industry and the public
+        sector to make that happen.
+      </p>
 
-    <div class="service-row">
-      <div class="service-role">Lead Organizer</div>
-      <div><a href="https://roadusermodels.github.io/" target="_blank">International Workshop on Modeling Human road User Behavior for Automated Vehicle Evaluation</a> (2026)</div>
-    </div>
-    <div class="service-row">
-      <div class="service-role">Steering Committee</div>
-      <div>International Workshop on Modeling Human road User Behavior for Automated Vehicle Evaluation (2024&ndash;present)</div>
-    </div>
-    <div class="service-row">
-      <div class="service-role">Task Force Member</div>
-      <div><a href="https://standardsworks.sae.org/standards-committees/j3330-task-force" target="_blank">SAE Task Force J3330</a> &mdash; Recommended Practice on Behavior Reference Models for Evaluating Automated Driving Systems (2024&ndash;present)</div>
-    </div>
-    <div class="service-row">
-      <div class="service-role">Associate Editor</div>
-      <div>IEEE Intelligent Transportation Systems Conference (2026)</div>
-    </div>
-    <div class="service-row">
-      <div class="service-role">Grant Reviewer</div>
-      <div>National Science Center, Poland (2026)</div>
-    </div>
-    <div class="service-row">
-      <div class="service-role">PhD Committee</div>
-      <div>Andres Laverde Marin, Universitat Politecnica de Valencia (2026)</div>
-    </div>
-    <div class="service-row">
-      <div class="service-role">Reviewer</div>
-      <div>IEEE Transactions/Conference on Intelligent Transportation Systems, ACM/IEEE HRI, Transportation Research Parts A/C/F, Psychological Science, Cognition, Human Factors, and others</div>
-    </div>
-  </section>
+      <div class="feature">
+        <div class="feature-kicker">From cognitive modeling to deployed AVs</div>
+        <div class="feature-title">The Waymo Reference Driver</div>
+        <p>
+          Developed in our collaboration with Waymo, the Reference Driver is a production-level model
+          of how humans avoid collisions. Waymo uses it daily for virtual safety assessment of its
+          automated vehicles — a direct pathway from cognitive modeling research to the safety
+          assurance of deployed AVs.
+        </p>
+        <div class="links">
+          <a href="https://waymo.com/blog/2026/06/reference-driver/" target="_blank">Waymo blog</a>
+          <a href="https://www.tudelft.nl/en/2026/me/news/safer-autonomous-vehicles-through-a-new-model-that-describes-how-human-drivers-avoid-collisions" target="_blank">TU Delft news</a>
+          <a href="https://www.theverge.com/transportation/947178/waymo-reference-driver-model-surprise-avoid-collision" target="_blank">The Verge</a>
+          <a href="https://techcrunch.com/2026/06/10/waymo-says-it-built-a-better-benchmark-for-comparing-robotaxis-to-humans/" target="_blank">TechCrunch</a>
+          <a href="https://www.engadget.com/2191225/waymo-made-a-virtual-human-driver-to-improve-its-robotaxis/" target="_blank">Engadget</a>
+        </div>
+      </div>
 
-  <!-- ─── Media ─── -->
-  <section id="media">
-    <h2>Media Coverage</h2>
-    <p>
-      My research has attracted broad media coverage, particularly following the deployment of the
-      <a href="https://waymo.com/blog/2026/06/reference-driver/" target="_blank">Waymo Reference Driver</a>
-      in 2026. Articles appeared in major tech and science outlets including
-      <a href="https://www.theverge.com/transportation/947178/waymo-reference-driver-model-surprise-avoid-collision" target="_blank">The Verge</a>,
-      <a href="https://techcrunch.com/2026/06/10/waymo-says-it-built-a-better-benchmark-for-comparing-robotaxis-to-humans/" target="_blank">TechCrunch</a>, and
-      <a href="https://www.engadget.com/2191225/waymo-made-a-virtual-human-driver-to-improve-its-robotaxis/" target="_blank">Engadget</a>,
-      as well as Dutch media including <em>Algemeen Dagblad</em> and
-      <a href="https://www.nemokennislink.nl/publicaties/drempels-op-de-weg-voor-robotauto/" target="_blank"><em>Nemo Kennislink</em></a>.
-      Earlier work on human-inspired models for self-driving cars was covered in
-      <a href="https://delta.tudelft.nl/en/article/new-mathematical-model-for-autonomous-driving-thinks-like-a-human" target="_blank">Delta</a>
-      and multiple TU Delft press releases.
-    </p>
-  </section>
+      <div class="partners">
+        <div class="p-label">Industry</div>
+        <div>Directly funded projects, joint proposals, and MSc projects with <strong>Waymo, Nissan, BMW, Porsche, TNO, and cogniBIT</strong> — including three patents in Japan and the US.</div>
+
+        <div class="p-label">Public sector</div>
+        <div>Work on evaluating and regulating automated driving with the <strong>European Commission Joint Research Centre</strong>, the <strong>Dutch Vehicle Authority (RDW)</strong>, and the <strong>Central Bureau for Driving Licenses (CBR)</strong>.</div>
+
+        <div class="p-label">Standards</div>
+        <div>Member of the <a href="https://standardsworks.sae.org/standards-committees/j3330-task-force" target="_blank">SAE J3330 task force</a>, developing recommended practice for behavior reference models in automated driving assessment.</div>
+
+        <div class="p-label">Policy</div>
+        <div>Work on meaningful human control has been incorporated into EU and global policy documents on autonomous weapon systems and AI for crisis management.</div>
+      </div>
+
+      <h3>Where this is heading</h3>
+      <p>
+        There is strong demand from manufacturers, regulators, and policymakers for scientifically
+        grounded, ready-to-use tools for AV safety assessment. My ambition is to meet it by translating
+        driver modeling research into <strong>public-domain behavior reference models and evaluation
+        methods</strong> that can be widely adopted in industry practice, regulation, certification,
+        and consumer testing.
+      </p>
+      <p class="small" style="margin-top:1.2rem;">
+        Also in the media:
+        <a href="https://delta.tudelft.nl/en/article/new-mathematical-model-for-autonomous-driving-thinks-like-a-human" target="_blank">Delta</a>,
+        <a href="https://www.ad.nl/delft/kunnen-zelfrijdende-autos-net-zo-veilig-rijden-als-wij-dat-moeten-ze-van-mensen-leren~ac93766c/" target="_blank">Algemeen Dagblad</a>,
+        <a href="https://www.nemokennislink.nl/publicaties/drempels-op-de-weg-voor-robotauto/" target="_blank">NEMO Kennislink</a>,
+        <a href="https://www.tudelft.nl/en/2024/me/news/merging-like-a-human-tu-delft-develops-new-model-to-help-self-driving-cars-drive-socially" target="_blank">TU Delft</a>.
+      </p>
+    </section>
+
+    <!-- ═══════════ TEAM ═══════════ -->
+    <section class="panel" id="panel-team" role="tabpanel" aria-labelledby="tab-team">
+      <p class="lead">
+        In my ideal research team, people have the autonomy to develop their own ideas, the support to
+        pursue them, and the opportunities to build careers beyond the group.
+      </p>
+      <p>
+        I see my role as providing direction and opportunities while giving team members ownership of
+        their projects — and the freedom to experiment, take risks, and make mistakes. The group's
+        intellectual direction is shaped by their questions and expertise, not imposed top-down.
+        My team is part of the <a href="https://www.tudelft.nl/en/ai/herald-lab" target="_blank">HERALD Lab</a>,
+        which I co-founded with Luca Laurenti, and works closely with Simeon Calvert's ADAS Lab to build
+        a larger community around human-centered automated driving.
+      </p>
+
+      <h3>Where people go next</h3>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-num">2</div>
+          <div class="stat-label">PhD alumni moving on to tenure-track positions (TU Delft, Sampoerna University)</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">4</div>
+          <div class="stat-label">MSc alumni continued to PhDs (TU Delft, Utrecht, Aalto, Chalmers)</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">→</div>
+          <div class="stat-label">Others now research driver behavior at Waymo, Jaguar Land Rover, RDW, and cogniBIT</div>
+        </div>
+      </div>
+
+      <h3>PhD candidates</h3>
+      <div class="team-grid">
+        <div class="member">
+          <div class="m-name">Ashwin George</div>
+          <div class="m-topic">Quantifying responsibility in spatial multi-agent interactions</div>
+        </div>
+        <div class="member">
+          <div class="m-name">Sahel Akbari <span class="m-note">(Erasmus MC)</span></div>
+          <div class="m-topic">Data-driven assessment of upper-limb movement after stroke</div>
+        </div>
+      </div>
+
+      <h3>PhD alumni</h3>
+      <div class="team-grid">
+        <div class="member">
+          <div class="m-name">Julian Schumann <span class="badge">cum laude</span></div>
+          <div class="m-topic">Evaluating predictions and explaining human driving behavior</div>
+        </div>
+        <div class="member">
+          <div class="m-name">Lucas Elbert Suryana</div>
+          <div class="m-topic">Meaningful human control in automated vehicle decision-making</div>
+        </div>
+        <div class="member">
+          <div class="m-name">Olger Siebinga <span class="badge">cum laude</span></div>
+          <div class="m-topic">Communication-enabled interactions in highway traffic</div>
+        </div>
+      </div>
+
+      <h3>Postdocs &amp; researchers</h3>
+      <div class="team-grid">
+        <div class="member"><div class="m-name">Bhargav Nallapu</div><div class="m-topic">Postdoc, 2024–2025</div></div>
+        <div class="member"><div class="m-name">Federico Scari</div><div class="m-topic">Research engineer, 2024–2025</div></div>
+        <div class="member"><div class="m-name">Samir Mohammad</div><div class="m-topic">Research engineer, 2023–2024</div></div>
+      </div>
+    </section>
+
+    <!-- ═══════════ TEACHING ═══════════ -->
+    <section class="panel" id="panel-teaching" role="tabpanel" aria-labelledby="tab-teaching">
+      <p class="lead">
+        The thing I enjoy most about my work is interacting with students — their curiosity,
+        creativity, and independence.
+      </p>
+      <p>
+        Students are exceptionally good at finding creative solutions to complex problems, but it is
+        easy to become so immersed in solving a problem that the bigger picture disappears: why it
+        matters, what gap it addresses, what follows from it. In research projects I coach students to
+        find a real gap in knowledge and to recognize that they are not merely implementing a model or
+        running an experiment, but possibly becoming the first person to discover something about the
+        world. In lectures, I connect technical concepts to the human and societal consequences of
+        robotics. And I encourage students to look beyond their own discipline, because that is where
+        better questions come from.
+      </p>
+
+      <div class="quote">
+        The goal is not only to train people who can build sophisticated technology, but engineers and
+        scientists who know which problems are worth solving — and why.
+      </div>
+
+      <div class="rows">
+        <div class="row">
+          <div><div class="row-title">Graduation projects</div><div class="row-meta">Over 35 MSc projects supervised across TU Delft faculties, many leading to publications; one received the award for the best AI-related MSc thesis at TU Delft (2024)</div></div>
+          <div class="row-when"></div>
+        </div>
+        <div class="row">
+          <div><div class="row-title">Internship coordinator, MSc Robotics</div><div class="row-meta">Around 500 students coordinated to date</div></div>
+          <div class="row-when">2021 – present</div>
+        </div>
+        <div class="row">
+          <div><div class="row-title">Fundamentals of AI</div><div class="row-meta">Responsible for the project component of the interdisciplinary, university-wide MSc programme</div></div>
+          <div class="row-when">2021 – 2024</div>
+        </div>
+        <div class="row">
+          <div><div class="row-title">Human-Robot Interaction</div><div class="row-meta">Invited lecture on human behavior modeling</div></div>
+          <div class="row-when">2021 – present</div>
+        </div>
+        <div class="row">
+          <div><div class="row-title">Robots and Society</div><div class="row-meta">Invited lecture on meaningful human control</div></div>
+          <div class="row-when">2021 – present</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ COMMUNITY ═══════════ -->
+    <section class="panel" id="panel-community" role="tabpanel" aria-labelledby="tab-community">
+      <p class="lead">
+        I enjoy bringing people together around shared goals — across research groups, disciplines,
+        and the boundary between academia and industry.
+      </p>
+
+      <h3 style="margin-top:0.6rem;">Building a new research community</h3>
+      <p style="margin-bottom:1.4rem;">
+        Cognitive models for AV safety assessment are an emerging niche at the intersection of
+        cognitive science, AI, and automated driving. I have been part of growing it from a small
+        meeting of experts into a recurring international event:
+      </p>
+      <div class="timeline">
+        <div class="t-item">
+          <div class="t-year">2024</div>
+          <div class="t-text">Invited to a two-day expert workshop at Wittenburg Castle to define the emerging research agenda</div>
+        </div>
+        <div class="t-item">
+          <div class="t-year">2025</div>
+          <div class="t-text">Keynote at the follow-up workshop at IEEE IAVVC</div>
+        </div>
+        <div class="t-item">
+          <div class="t-year">2026</div>
+          <div class="t-text">Main organizer of the <a href="https://roadusermodels.github.io/" target="_blank">workshop at IEEE ITSC</a> — now a yearly event series, with me on its steering committee</div>
+        </div>
+      </div>
+
+      <h3>Centre for Meaningful Human Control</h3>
+      <p>
+        In 2024 I co-founded the
+        <a href="https://www.tudelft.nl/centre-for-meaningful-human-control" target="_blank">Centre for Meaningful Human Control</a>
+        with Luciano Siebert and David Abbink, bringing together around 30 researchers across
+        engineering, design, ethics, and philosophy. As Director for Partnerships and Collaborations,
+        I connect members to research opportunities and build partnerships with organizations that can
+        put our research to use.
+      </p>
+
+      <h3>At TU Delft and beyond</h3>
+      <div class="rows">
+        <div class="row">
+          <div><div class="row-title">Automated driving community at TU Delft</div><div class="row-meta">Seminars with invited experts including Missy Cummings, Cristina Olaverri-Monreal, and Johan Engström; events with Mondai House of AI and the TU Delft AI Initiative</div></div>
+          <div class="row-when"></div>
+        </div>
+        <div class="row">
+          <div><div class="row-title">IEEE Intelligent Transportation Systems Conference</div><div class="row-meta">Associate editor</div></div>
+          <div class="row-when">2026</div>
+        </div>
+        <div class="row">
+          <div><div class="row-title">Reviewing</div><div class="row-meta">IEEE T-ITS and T-IV, Transportation Research, Human Factors, Psychological Science, Cognition, ACM/IEEE HRI, and others</div></div>
+          <div class="row-when"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
 
   <footer>
-    <p>
-      Arkady Zgonnikov &middot; Delft University of Technology &middot;
-      <a href="mailto:a.zgonnikov@tudelft.nl">a.zgonnikov@tudelft.nl</a>
-    </p>
+    Arkady Zgonnikov &middot; Delft University of Technology &middot; <a href="mailto:a.zgonnikov@tudelft.nl">a.zgonnikov@tudelft.nl</a>
   </footer>
-
 </div>
+
+<script>
+  (function () {
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+    var names = tabs.map(function (t) { return t.dataset.tab; });
+
+    function show(name) {
+      if (names.indexOf(name) === -1) name = names[0];
+      tabs.forEach(function (t) {
+        var on = t.dataset.tab === name;
+        t.setAttribute('aria-selected', on);
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+      });
+    }
+
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () {
+        history.replaceState(null, '', '#' + t.dataset.tab);
+        show(t.dataset.tab);
+      });
+      t.addEventListener('keydown', function (e) {
+        var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (!d) return;
+        var next = tabs[(i + d + tabs.length) % tabs.length];
+        next.click(); next.focus();
+      });
+    });
+
+    window.addEventListener('hashchange', function () { show(location.hash.slice(1)); });
+    show(location.hash.slice(1));
+  })();
+</script>
 </body>
 </html>
