@@ -73,8 +73,9 @@
     .tabs::-webkit-scrollbar { display: none; }
     .tab {
       appearance: none; background: none; border: none; font: inherit;
-      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--muted); padding: 0.8rem 0 0.75rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.14rem; font-weight: 500; letter-spacing: 0.01em;
+      color: var(--muted); padding: 0.6rem 0 0.55rem;
       border-bottom: 2px solid transparent; margin-bottom: -1px;
       cursor: pointer; white-space: nowrap; transition: color 0.15s, border-color 0.15s;
     }
@@ -95,9 +96,13 @@
       font-weight: 500; font-size: 1.6rem; line-height: 1.2; margin-bottom: 1rem;
     }
     h3 {
-      font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
-      color: var(--muted); margin: 2.6rem 0 1rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-weight: 500; font-size: 1.32rem; line-height: 1.2;
+      color: var(--accent);
+      display: flex; align-items: center; gap: 0.9rem;
+      margin: 2.8rem 0 1.1rem;
     }
+    h3::after { content: ""; flex: 1; height: 1px; background: var(--border); }
     p { margin-bottom: 0.85rem; }
     p:last-child { margin-bottom: 0; }
     .lead {
@@ -105,21 +110,6 @@
       font-size: 1.34rem; line-height: 1.5; margin-bottom: 1.2rem;
     }
     .small { font-size: 0.88rem; color: var(--muted); }
-
-    /* ─── Question shift ─── */
-    .shift {
-      margin: 2.2rem 0; padding: 1.6rem 1.8rem;
-      background: var(--bg-card); border-left: 3px solid var(--accent);
-    }
-    .shift-label {
-      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 0.15rem;
-    }
-    .shift-q {
-      font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; line-height: 1.35;
-    }
-    .shift-q.old { color: var(--faint); text-decoration: line-through; text-decoration-thickness: 1px; margin-bottom: 0.9rem; }
-    .shift-q.new { font-weight: 600; color: var(--accent); }
 
     /* ─── Research lines ─── */
     .line {
@@ -137,12 +127,6 @@
       line-height: 1.3; margin-bottom: 0.45rem;
     }
     .line p { font-size: 0.92rem; color: var(--text); }
-    .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.7rem; }
-    .tag {
-      font-size: 0.72rem; font-weight: 500; color: var(--accent);
-      background: var(--bg-card); border: 1px solid var(--border);
-      padding: 0.1em 0.55em; border-radius: 2px;
-    }
 
     /* ─── Future ─── */
     .future { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
@@ -159,8 +143,8 @@
       margin-bottom: 2.4rem;
     }
     .feature-kicker {
-      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 0.3rem;
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: 1.05rem; color: var(--accent); margin-bottom: 0.1rem;
     }
     .feature-title {
       font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 1.5rem;
@@ -174,8 +158,8 @@
     .partners > div { padding: 0.75rem 0; border-bottom: 1px solid var(--border); font-size: 0.92rem; }
     .partners > div:nth-last-child(-n+2) { border-bottom: none; }
     .p-label {
-      font-size: 0.72rem !important; font-weight: 600; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--muted); padding-top: 0.95rem !important;
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: 1.08rem !important; color: var(--accent); padding-top: 0.7rem !important;
     }
 
     /* ─── People ─── */
@@ -185,10 +169,8 @@
     .m-note { font-weight: 400; font-size: 0.8rem; color: var(--muted); }
     .m-topic { font-size: 0.83rem; color: var(--muted); line-height: 1.45; }
     .badge {
-      font-size: 0.66rem; font-weight: 600; color: var(--accent);
-      background: var(--bg-card); border: 1px solid var(--border);
-      padding: 0.08em 0.4em; border-radius: 2px;
-      text-transform: uppercase; letter-spacing: 0.03em; margin-left: 0.3em; vertical-align: middle;
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: 0.98rem; font-weight: 500; color: var(--accent); margin-left: 0.35em;
     }
 
     .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
@@ -240,14 +222,12 @@
       .header-inner { flex-direction: column-reverse; align-items: center; }
       .headshot { width: 110px; }
       .tabs { gap: 0.6rem; justify-content: space-between; }
-      .tab { font-size: 0.66rem; letter-spacing: 0.03em; }
-      .shift { padding: 1.2rem 1.2rem; }
-      .shift-q { font-size: 1.2rem; }
+      .tab { font-size: 0.96rem; }
       .line { grid-template-columns: 1fr; gap: 0.2rem; }
       .future, .stats, .team-grid { grid-template-columns: 1fr; }
       .partners { grid-template-columns: 1fr; }
       .partners > div { border-bottom: none; padding: 0.15rem 0; }
-      .p-label { padding-top: 0.9rem !important; }
+      .p-label { padding-top: 0.8rem !important; }
       .rows .row { grid-template-columns: 1fr; }
       .row-when { text-align: left; }
       .feature { padding: 1.2rem; }
@@ -310,12 +290,6 @@
         remain aligned with human intentions, norms, and values, including the most basic one: safety.
       </p>
 
-      <div class="shift">
-        <div class="shift-label">The question is shifting from</div>
-        <div class="shift-q old">Can we build a vehicle that drives itself?</div>
-        <div class="shift-label">to</div>
-        <div class="shift-q new">Can we build an automated vehicle that is safe enough?</div>
-      </div>
 
       <h3>Three research lines</h3>
 
@@ -331,7 +305,6 @@
             processes during driving. This work built a bridge between fundamental research on human
             decision-making and the study of driving.
           </p>
-          <div class="tags"><span class="tag">evidence accumulation</span><span class="tag">gap acceptance</span><span class="tag">overtaking</span><span class="tag">response times</span></div>
         </div>
       </div>
 
@@ -348,7 +321,6 @@
             Waymo, it led to a framework grounded in <strong>active inference</strong>, culminating in
             a collision-avoidance model with unprecedented generalization capabilities.
           </p>
-          <div class="tags"><span class="tag">active inference</span><span class="tag">risk homeostasis</span><span class="tag">communication-enabled interaction</span><span class="tag">model-predictive control</span></div>
         </div>
       </div>
 
@@ -363,15 +335,13 @@
             for <strong>quantifying responsibility</strong> in interactions between humans and AVs.
             This line provides the ethical foundation for the rest of my work.
           </p>
-          <div class="tags"><span class="tag">meaningful human control</span><span class="tag">responsibility</span><span class="tag">ethics of technology</span></div>
         </div>
       </div>
 
       <p class="small" style="margin-top:1.4rem;">
         <strong style="color:var(--text);">Beyond the core.</strong> I also enjoy exploring adjacent
         areas: methods and open-source tools for evaluating trajectory prediction models and
-        interaction-aware controllers, novel AV algorithms, fundamental AI methods, and — with
-        colleagues at Erasmus MC — human-centered AI for neurorehabilitation.
+        interaction-aware controllers, novel AV algorithms, and fundamental AI methods.
       </p>
 
       <h3>The next ten years</h3>
